@@ -28,7 +28,6 @@ def load_monitoria_operacao_equipe(df):
         with engine.connect() as connection:
             trans = connection.begin()
             try:
-                # Primeiro, excluir os registros que correspondem ao critério especificado
                 delete_query = text("""
                     DELETE FROM homologacao.monitoria_operacao_equipe
                     WHERE id_monitoria_operacao IN (
@@ -39,19 +38,16 @@ def load_monitoria_operacao_equipe(df):
                 """)
                 connection.execute(delete_query)
 
-                # Em seguida, inserir os novos registros (upsert)
                 upsert_query = text("""
                     INSERT INTO homologacao.monitoria_operacao_equipe (id_monitoria_operacao_equipe, id_monitoria_operacao, matricula)
                     VALUES (:matricula, :id_rh_centro_custo, :matricula)
                     ON CONFLICT (id_monitoria_operacao_equipe) DO NOTHING
                 """)
 
-                # Inserir cada registro individualmente
                 records = df.to_dict(orient='records')
                 for record in records:
                     connection.execute(upsert_query, record)
 
-                # Confirmar a transação
                 trans.commit()
                 logging.info("load_operacao_equipe: Fim operacao_equipe.")
                 

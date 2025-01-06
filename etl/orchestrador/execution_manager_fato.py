@@ -24,7 +24,8 @@ from etl.load.load_monitoria_operacao import load_monitoria_operacao
 
 
 
-def colaborador_movimento():
+def fato_colaborador_movimento():
+    logging.info("execution_manager: fato")
     """
     RH Senior:
     1 - extração da tabela
@@ -147,6 +148,7 @@ def colaborador_movimento():
 
     df_quadro_online['matricula'] = df_quadro_online['MATRICULA'].astype(int)
     df_quadro_online['id_rh_centro_custo'] = df_quadro_online['CODIGO_CT_CUSTO'].astype(str).str.replace(' ', '').str.replace('.', '', regex=False)
+    df_rh_centro_custo['id_rh_centro_custo'] = df_rh_centro_custo['id_rh_centro_custo'].astype(str).str.replace(' ', '').str.replace('.', '', regex=False)
     df_quadro_online = pd.merge(df_quadro_online, df_rh_centro_custo, on='id_rh_centro_custo', how='inner')
 
 
@@ -174,7 +176,7 @@ def colaborador_movimento():
     df_colaborador_movimento['id_rh_site'] = df_colaborador_movimento['matricula'].map(site_map).combine_first(df_colaborador_movimento['id_rh_site'])
 
 
-    df_colaborador_movimento['concat_colunas'] = df_colaborador_movimento['matricula'].astype(str) + df_colaborador_movimento['id_rh_organizacao'].astype(str) + df_colaborador_movimento['id_rh_centro_custo'].astype(str) + df_colaborador_movimento['id_rh_cargo'].astype(str) + df_colaborador_movimento['id_rh_status'].astype(str) + df_colaborador_movimento['id_rh_supervisor'].astype(str) + df_colaborador_movimento['id_rh_gerente'].astype(str) + df['id_rh_coordenador'].astype(str) + df_colaborador_movimento['id_rh_site'].astype(str)
+    df_colaborador_movimento['concat_colunas'] = df_colaborador_movimento['matricula'].astype(str) + df_colaborador_movimento['id_rh_organizacao'].astype(str) + df_colaborador_movimento['id_rh_centro_custo'].astype(str) + df_colaborador_movimento['id_rh_cargo'].astype(str) + df_colaborador_movimento['id_rh_status'].astype(str) + df_colaborador_movimento['id_rh_supervisor'].astype(str) + df_colaborador_movimento['id_rh_gerente'].astype(str) + df_colaborador_movimento['id_rh_coordenador'].astype(str) + df_colaborador_movimento['id_rh_site'].astype(str)
     df_colaborador_movimento['id_rh_modificacao'] = df_colaborador_movimento['concat_colunas'].apply(gerar_md5_concat)
 
 

@@ -66,68 +66,68 @@ from etl.extraction.extraction_supervisor_quadro import extraction_supervisor_qu
 
 
 # 1 - Service Execução:
-def service_afastamento():
+def dim_afastamento():
     logging.info("execution_manager: afastamento")
     df = extraction_afastamento()
     df = transform_afastamento(df)
     load_afastamento(df)
 
 # 2 - Cargo Execução:
-def service_cargo():
+def dim_cargo():
     logging.info("execution_manager: cargo")
     df = extraction_cargo()
     df = transform_cargo(df)
     load_cargo(df)
 
 # 3 - Centro Custo Execução:
-def service_centro_custo():
+def dim_centro_custo():
     logging.info("execution_manager: centro custo")
     df = extraction_centro_custo()
     df = transform_centro_custo(df)
     load_centro_custo(df)
 
 # 4 - Colaborador Execução:
-def service_colaborador():
+def dim_colaborador():
     logging.info("execution_manager: colaborador")
     df = extraction_colaborador()
     df = transform_colaborador(df)
     load_colaborador(df)
 
 # 5 - Gestão Quadro Execução:
-def service_gestao_quadro():
+def dim_gestao_quadro():
     logging.info("execution_manager: gestao quadro")
     df = extraction_gestao_quadro()
     print(df)
 
 # 6 - Organização Execução:
-def service_organizacao():
+def dim_organizacao():
     logging.info("execution_manager: organização")
     df = extraction_organizacao()
     df = transform_organizacao(df)
     load_organizacao(df)
 
 # 7 - Quadro Site Execução:
-def service_quadro_site():
+def dim_quadro_site():
     logging.info("execution_manager: quadro_site")
     df = extraction_quadro_site()
     df = transform_quadro_site(df)
     load_quadro_site(df)
 
 # 8 - Afastamento Execução:
-def service_situacao_afastamento():
+def dim_situacao_afastamento():
     logging.info("execution_manager: afastamento")
     df = extraction_situacao_afastamento()
     df = transform_situacao_afastamento(df)
     load_situacao_afastamento(df)
 
 # 9 - Status Execução:
-def service_status():
+def dim_status():
     logging.info("execution_manager: status")
     df = extraction_status()
     df = transform_status(df)
     load_status(df)
 
 # 10 - Quadro Supervisor Execução:
-def service_supervisor_quadro():
+def dim_supervisor_quadro():
     logging.info("execution_manager: quadro_supervisor")
     df = extraction_supervisor_quadro()

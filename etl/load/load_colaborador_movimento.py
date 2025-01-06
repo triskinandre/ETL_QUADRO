@@ -31,11 +31,9 @@ def load_colaborador_movimento(df):
         trans = connection.begin()
         try:
             for _, row in df.iterrows():
-                # Verifica se o id_rh_modificacao já existe
                 query_check = text("SELECT id_rh_modificacao FROM homologacao.rh_colaborador_movimento WHERE id_rh_modificacao = :id_rh_modificacao")
                 result = connection.execute(query_check, {'id_rh_modificacao': row['id_rh_modificacao']}).fetchone()
                 if result is None:
-                    # Atualiza a linha existente para 'atual = FALSE' usando a matricula
                     update_query = text("""
                         UPDATE homologacao.rh_colaborador_movimento
                         SET atual = FALSE
@@ -43,7 +41,6 @@ def load_colaborador_movimento(df):
                     """)
                     connection.execute(update_query, {'matricula': row['matricula']})
 
-                    # Insere o novo registro
                     insert_query = text("""
                         INSERT INTO homologacao.rh_colaborador_movimento 
                         (

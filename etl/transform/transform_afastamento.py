@@ -1,3 +1,12 @@
+"""
+Transforma e formata um DataFrame com dados de afastamentos.
+
+Essa função realiza as seguintes operações no DataFrame de entrada:
+1. Converte o formato das colunas de data especificadas.
+2. Renomeia colunas do DataFrame para seguir um padrão mais claro.
+3. Seleciona apenas as colunas relevantes para o resultado final.
+"""
+
 import logging
 from utils.date import convert_date_format_for_pd
 
